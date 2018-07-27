@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const { get } = require('axios')
+const ejs = require('ejs')
 
 require('json-dotenv')()
 
@@ -11,6 +12,26 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(`${__dirname}/dist`))
+
+
+app.get('/', (req, res) => { // order api
+
+    let data = {
+            buyer_no : 2335,
+            buyer_name : '홍길동',
+            buyer_hp : '01012345678',
+            buyer_email : 'test@payple.co.kr',
+            buy_goods : '휴대폰',
+            buy_total : '1000',
+            order_num : '101'
+        },
+        opts = {}
+
+
+    ejs.renderFile(__dirname + '/ejs/order.html', data, opts, (err, str) => !err && res.send(str))
+
+
+})
 
 
 app.post('/auth', (req, res) => {
