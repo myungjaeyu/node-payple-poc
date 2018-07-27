@@ -127,7 +127,7 @@ var PaypleCpayAuthCheck = function (orderForm) {
         type: 'POST',
         cache: false,
         processData: false,
-        url: '/cPayPayple/payple_payAuth.html',
+        url: '/auth',
         contentType: false,
         async: false,
         dataType: 'json',
