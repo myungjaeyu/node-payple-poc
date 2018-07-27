@@ -34,6 +34,37 @@ app.get('/', (req, res) => { // order api
 })
 
 
+app.post('/confirm', (req, res) => { // order confirm api
+
+    let { 
+            buyer_no, buyer_name, buyer_hp, buyer_email,
+            buy_goods, buy_total,
+            order_num,
+            pay_year, pay_month,
+            is_reguler, is_taxsave
+        } = req.body,
+        data = {
+            buyer_no : buyer_no || '',
+            buyer_name : buyer_name || '',
+            buyer_hp : buyer_hp || '',
+            buyer_email : buyer_email || '',
+            buy_goods : buy_goods || '',
+            buy_total : buy_total || '',
+            order_num : order_num || '',
+            pay_year : pay_year || '',
+            pay_month : pay_month || '',
+            is_reguler : is_reguler || false,
+            is_taxsave : is_taxsave || false
+        },
+        opts = {}
+
+
+    ejs.renderFile(__dirname + '/ejs/order_confirm.html', data, opts, (err, str) => !err && res.send(str))
+
+
+})
+
+
 app.post('/auth', (req, res) => {
 
     let url = 'https://testcpay.payple.kr/php/auth.php',
